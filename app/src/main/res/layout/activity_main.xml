@@ -25,7 +25,7 @@
 
     <EditText
         android:layout_marginTop="16dp"
-        android:id="@+id/editTextContraseña"
+        android:id="@+id/editTextContrasenha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Escriba su contraseña.."/>
@@ -37,5 +37,14 @@
         android:layout_height="wrap_content"
         android:textAllCaps="true"
         android:text="Ingresar"/>
+
+    <Button
+        android:id="@+id/buttonRegister"
+        android:layout_marginTop="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="true"
+        android:backgroundTint="@color/black"
+        android:text="Registarse"/>
 
 </LinearLayout>

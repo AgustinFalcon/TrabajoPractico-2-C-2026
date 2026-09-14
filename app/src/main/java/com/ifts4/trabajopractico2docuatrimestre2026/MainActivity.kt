@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val user = findViewById<EditText>(R.id.editTextUsuario)
-        val contraseña = findViewById<EditText>(R.id.editTextContraseña)
+        val contraseña = findViewById<EditText>(R.id.editTextContrasenha)
         val buttonIngresar = findViewById<Button>(R.id.buttonIngresar)
 
         /*buttonIngresar.setOnClickListener {
@@ -30,6 +30,23 @@ class MainActivity : AppCompatActivity() {
         }*/
 
         binding.buttonIngresar.setOnClickListener {
+           val preferences = getSharedPreferences("Credenciales", MODE_PRIVATE)
+            // lo que almaceno el usuario
+            val username = preferences.getString("username", "")
+            val password = preferences.getString("password", "")
+
+            // lo que escribio el usuario en el login
+            val usernameIngresado = binding.editTextUsuario.text.toString()
+            val passwordIngresada = binding.editTextContrasenha.text.toString()
+
+            if (username == usernameIngresado && password == passwordIngresada) {
+                Toast.makeText(this, "Bienvenido ${usernameIngresado}", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        binding.buttonRegister.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             intent.putExtra("username", binding.editTextUsuario.text.toString())
             startActivity(intent)
