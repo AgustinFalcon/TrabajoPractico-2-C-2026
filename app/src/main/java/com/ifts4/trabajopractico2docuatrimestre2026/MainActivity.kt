@@ -7,12 +7,14 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.Gson
 import com.ifts4.trabajopractico2docuatrimestre2026.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    //val preferences =  lazy { getSharedPreferences(RegisterActivity.CREDENCIALES, MODE_PRIVATE) }
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,20 +32,7 @@ class MainActivity : AppCompatActivity() {
         }*/
 
         binding.buttonIngresar.setOnClickListener {
-           val preferences = getSharedPreferences("Credenciales", MODE_PRIVATE)
-            // lo que almaceno el usuario
-            val username = preferences.getString("username", "")
-            val password = preferences.getString("password", "")
-
-            // lo que escribio el usuario en el login
-            val usernameIngresado = binding.editTextUsuario.text.toString()
-            val passwordIngresada = binding.editTextContrasenha.text.toString()
-
-            if (username == usernameIngresado && password == passwordIngresada) {
-                Toast.makeText(this, "Bienvenido ${usernameIngresado}", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
-            }
+            validateUser()
         }
 
         binding.buttonRegister.setOnClickListener {
@@ -52,6 +41,59 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             //Toast.makeText(this, "Bienvenido ${binding.editTextUsuario.text}", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkAutoLogin()
+    }
+
+    private fun checkAutoLogin() {
+        val preferences = getSharedPreferences(RegisterActivity.CREDENCIALES, MODE_PRIVATE)
+        val autoLogin = preferences.getBoolean("autoLogin", false)
+
+        if (autoLogin) {
+            navigateToHome()
+        }
+    }
+
+    fun validateUser() {
+        val preferences = getSharedPreferences(RegisterActivity.CREDENCIALES, MODE_PRIVATE)
+        val gson = Gson()
+        val edit  = preferences.edit()
+        // lo que almaceno el usuario
+        /*val username = preferences.getString("username", "")
+        val password = preferences.getString("password", "")*/
+
+        try {
+            val userInJsonFormat = preferences.getString(RegisterActivity.USER, null) /*?: return*/
+            val user = gson.fromJson(userInJsonFormat, User::class.java)
+
+
+            // lo que escribio el usuario en el login
+            val usernameIngresado = binding.editTextUsuario.text.toString()
+            val passwordIngresada = binding.editTextContrasenha.text.toString()
+
+            if (user.username == usernameIngresado && user.password == passwordIngresada) {
+                edit.putBoolean("autoLogin", binding.checkboxSession.isChecked)
+                edit.apply()
+
+                Toast.makeText(this, "Bienvenido ${usernameIngresado}", Toast.LENGTH_SHORT).show()
+
+                navigateToHome()
+
+            } else {
+                Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
+            }
+        } catch (e: Exception) {
+            Toast.makeText(this, "No hay usuario creado", Toast.LENGTH_SHORT).show()
+        }
+
+    }
+
+    private fun navigateToHome() {
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
     }
 
 }
