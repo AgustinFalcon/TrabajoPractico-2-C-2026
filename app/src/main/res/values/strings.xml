@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Trabajo Practico 2do Cuatrimestre 2026</string>
     <string name="bienvenidos"> Bienvenidos/as a desarrollo mobile</string>
+    <string name="open_drawer_layout">Open</string>
+    <string name="close_drawer_layout">Close</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
