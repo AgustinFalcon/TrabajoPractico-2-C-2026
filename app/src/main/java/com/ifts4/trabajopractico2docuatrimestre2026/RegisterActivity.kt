@@ -81,8 +81,12 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
     override fun onItemSelected(
         p0: AdapterView<*>?, p1: View?, position: Int, p3: Long
     ) {
-        colorSelected = arrayColors[position]
-        Toast.makeText(this, "Seleccionaste ${arrayColors[position]}", Toast.LENGTH_SHORT).show()
+        if (arrayColors.get(position) != Colors.NOTHING_SELECTED) {
+            colorSelected = arrayColors[position]
+            Toast.makeText(this, "Seleccionaste ${arrayColors[position]}", Toast.LENGTH_SHORT).show()
+        } else {
+            colorSelected  = null
+        }
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
