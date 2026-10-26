@@ -1,29 +1,28 @@
-package com.ifts4.trabajopractico2docuatrimestre2026
+package com.ifts4.trabajopractico2docuatrimestre2026.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.navigation.NavigationView
+import com.ifts4.trabajopractico2docuatrimestre2026.R
+import com.ifts4.trabajopractico2docuatrimestre2026.RegisterActivity
 import com.ifts4.trabajopractico2docuatrimestre2026.databinding.ActivityHomeBinding
-import com.ifts4.trabajopractico2docuatrimestre2026.fragments.FirstFragment
-import com.ifts4.trabajopractico2docuatrimestre2026.fragments.SecondFragment
-import com.ifts4.trabajopractico2docuatrimestre2026.fragments.ThirdFragment
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: ActivityHomeBinding
 
     private lateinit var drawerLayout: DrawerLayout
+
+    private lateinit var navController: NavController
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,10 +49,13 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.string.close_drawer_layout
         )
 
-        if (savedInstanceState == null) {
+        /*if (savedInstanceState == null) {
             replaceFragment(FirstFragment())
             binding.navigationView.setCheckedItem(R.id.nav_item_one)
-        }
+        }*/
+
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        navController = navHostFragment.navController
 
         drawerLayout.addDrawerListener(toggle)
         binding.navigationView.setNavigationItemSelectedListener(this)
@@ -63,26 +65,29 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_burguer)
     }
 
-    private fun replaceFragment(fragment: Fragment) {
+    /*private fun replaceFragment(fragment: Fragment) {
         val transition = supportFragmentManager.beginTransaction()
         transition.replace(R.id.fragmentContainerView, fragment)
         transition.commit()
-    }
+    }*/
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.nav_item_one -> {
-                replaceFragment(FirstFragment())
+                //replaceFragment(FirstFragment())
+                navController.navigate(R.id.firstFragment)
                 Toast.makeText(this, "Opcion 1", Toast.LENGTH_SHORT).show()
             }
 
             R.id.nav_item_two -> {
-                replaceFragment(SecondFragment())
+                //replaceFragment(SecondFragment())
+                navController.navigate(R.id.secondFragment)
                 Toast.makeText(this, "Opcion 2", Toast.LENGTH_SHORT).show()
             }
 
             R.id.nav_item_three -> {
-                replaceFragment(ThirdFragment())
+                //replaceFragment(ListFragment())
+                navController.navigate(R.id.listFragment)
                 Toast.makeText(this, "Opcion 3", Toast.LENGTH_SHORT).show()
             }
         }

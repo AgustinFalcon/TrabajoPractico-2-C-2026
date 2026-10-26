@@ -1,4 +1,4 @@
-package com.ifts4.trabajopractico2docuatrimestre2026.fragments
+package com.ifts4.trabajopractico2docuatrimestre2026.home.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.ifts4.trabajopractico2docuatrimestre2026.R
 import com.ifts4.trabajopractico2docuatrimestre2026.databinding.FragmentSecondBinding
 
 

@@ -1,4 +1,4 @@
-package com.ifts4.trabajopractico2docuatrimestre2026.fragments
+package com.ifts4.trabajopractico2docuatrimestre2026.home.fragments
 
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent

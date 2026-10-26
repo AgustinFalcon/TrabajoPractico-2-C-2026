@@ -1,7 +1,6 @@
-package com.ifts4.trabajopractico2docuatrimestre2026.fragments
+package com.ifts4.trabajopractico2docuatrimestre2026.home.fragments
 
 import androidx.core.util.PatternsCompat
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
