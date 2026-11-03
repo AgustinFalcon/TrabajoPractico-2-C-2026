@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -51,6 +52,15 @@ dependencies {
 
     implementation("com.google.code.gson:gson:2.11.0")
 
+    // viewModels()
+    implementation("androidx.fragment:fragment-ktx:1.8.9")
+    implementation ("androidx.activity:activity-ktx:1.11.0")
+
     /*implementation("androidx.navigation:navigation-runtime-ktx:2.10.2")
     implementation("androidx.navigation:navigation-fragment-ktx:2.10.2")*/
+
+    // Room
+    implementation("androidx.room:room-runtime:2.8.5")
+    implementation("androidx.room:room-ktx:2.8.5")
+    ksp("androidx.room:room-compiler:2.8.5")
 }

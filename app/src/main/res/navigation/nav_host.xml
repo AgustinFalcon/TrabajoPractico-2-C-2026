@@ -12,11 +12,36 @@
         tools:layout="@layout/fragment_first" />
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.ifts4.trabajopractico2docuatrimestre2026.home.ui.ListFragment"
+        android:name="com.ifts4.trabajopractico2docuatrimestre2026.home.ui.list.ListFragment"
         android:label="fragment_list"
-        tools:layout="@layout/fragment_list" />
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment_to_addFragment"
+            app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
+    </fragment>
     <fragment
         android:id="@+id/secondFragment"
         android:name="com.ifts4.trabajopractico2docuatrimestre2026.home.fragments.SecondFragment"
         android:label="SecondFragment" />
+    <fragment
+        android:id="@+id/addFragment"
+        android:name="com.ifts4.trabajopractico2docuatrimestre2026.home.ui.add.AddFragment"
+        android:label="fragment_add"
+        tools:layout="@layout/fragment_add" >
+        <action
+            android:id="@+id/action_addFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.ifts4.trabajopractico2docuatrimestre2026.home.ui.update.UpdateFragment"
+        android:label="fragment_update"
+        tools:layout="@layout/fragment_update" >
+        <action
+            android:id="@+id/action_updateFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
 </navigation>
